@@ -50,11 +50,8 @@
 
 
         results.each(function(index, tr) {
-
+            
             clearInterval(searchInterval)
-            console.log("Whaaat", index);
-
-
 
             /*Create a indicator next to the price*/
             let indicator_id = "hacked_" + index;
@@ -62,15 +59,13 @@
             let stock_indicator = $("#" + indicator_id)
             stock_indicator.css("color", "blue")
 
-
             /*Load the product page and get the stock info*/
             let url = $(tr).find("a[data-qa=product-tile-container]").attr('href');
-            console.log(index, url)
             $.get(url, function(data) {
                 //Get stock text and add it to table row
                 let stock_em = $(data).find("[data-testid=stock-status-0]")
                 let stock_text = stock_em.text();
-                console.log("Stock text", stock_text);
+
                 stock_indicator.text(stock_text);
                 if ($(stock_em).attr("color") != 'Green') {
                     //Not in stock
